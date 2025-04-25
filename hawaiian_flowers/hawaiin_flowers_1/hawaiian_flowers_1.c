@@ -1,6 +1,6 @@
-/* hawaiian.c
- * 2006 pippin
- * Hawaiian Flowers 2025 Grok
+/* grok.c
+ *
+ * Copyright (C) 2025 LinuxBeaver and contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,6 +53,8 @@ property_color (petal_color, _("Petal Color"), "#ff4040")
 property_color (center_color, _("Center Color"), "#ffff00")
   description (_("Color of the flower center"))
 
+
+
 #else
 
 #define GEGL_OP_FILTER
@@ -65,6 +67,7 @@ static void
 prepare (GeglOperation *operation)
 {
   const Babl *format = babl_format ("RGBA float");
+
   gegl_operation_set_format (operation, "input", format);
   gegl_operation_set_format (operation, "output", format);
 }
@@ -137,7 +140,7 @@ process (GeglOperation       *operation,
               gfloat py = y + roi.y;
 
               /* Initialize output to transparent */
-              gfloat color[4] = {0.0f, 0.0f, 0.0f, 0.0f}; /* Transparent background */
+              gfloat color[4] = {0.0f, 0.0f, 0.0f, 0.0f}; /* FIXED: Transparent background */
               gfloat alpha = 0.0f; /* Transparent by default */
 
               /* Find the nearest flower center with staggered grid */
@@ -174,35 +177,29 @@ process (GeglOperation       *operation,
                   gfloat shape_factor = (o->petal_scale - 0.5f) / 1.5f; /* Use petal_scale */
                   gfloat w = petal_width * (1.0f - powf(t, 2.0f + shape_factor * 2.0f)); /* Dynamic tapering */
 
-                  /* CHANGED: Steep falloff to simulate lb:threshold-alpha */
+                  /* CHANGED: Simplified petal opacity for solid petals */
                   gfloat angular_distance = fabsf (petal_angle) / (G_PI / 5.0f);
                   gfloat edge_factor = angular_distance * petal_radius / w;
-                  gfloat petal_alpha = CLAMP(powf(1.0f - edge_factor, 4.0f), 0.0f, 1.0f); /* Steep power falloff for sharper edges */
-
-                  /* CHANGED: Simulate gegl:opacity value=2.9 by boosting alpha */
-                  petal_alpha = CLAMP(petal_alpha * 2.9f, 0.0f, 1.0f); /* Boost opacity */
+                  gfloat petal_alpha = CLAMP(1.0f - edge_factor * 0.5f, 0.0f, 1.0f); /* Linear falloff for solid petals */
 
                   for (gint j = 0; j < 3; j++)
                     color[j] = petal_color[j] * petal_alpha; /* Premultiply RGB by alpha */
                   alpha = petal_alpha; /* Solid red petals */
                 }
 
-              /* CHANGED: Draw the flower center with sharper edges */
+              /* CHANGED: Draw the flower center with soft edges */
               if (dist <= flower_center_radius)
                 {
-                  /* Steep falloff to simulate lb:threshold-alpha */
+                  /* Soften edges with a gradual falloff */
                   gfloat center_factor = dist / flower_center_radius;
-                  gfloat center_alpha = CLAMP(powf(1.0f - center_factor, 4.0f), 0.0f, 1.0f); /* Steep power falloff for sharper edges */
-
-                  /* CHANGED: Simulate gegl:opacity value=2.9 by boosting alpha */
-                  center_alpha = CLAMP(center_alpha * 2.9f, 0.0f, 1.0f); /* Boost opacity */
+                  gfloat center_alpha = CLAMP(1.0f - center_factor * 0.5f, 0.0f, 1.0f); /* Linear falloff for soft edges */
 
                   for (gint j = 0; j < 3; j++)
                     color[j] = center_color[j] * center_alpha; /* Premultiply RGB by alpha */
-                  alpha = center_alpha; /* Sharp-edged yellow centers */
+                  alpha = center_alpha; /* Soft-edged yellow centers */
                 }
 
-              /* Write to output buffer with premultiplied alpha */
+              /* FIXED: Write to output buffer with premultiplied alpha */
               for (gint j = 0; j < 3; j++)
                 out_data[offset + j] = color[j]; /* Write premultiplied RGB */
               out_data[offset + 3] = alpha; /* Write alpha */
@@ -210,7 +207,9 @@ process (GeglOperation       *operation,
         }
     }
 
-  return TRUE;
+  return TRUE; /* FIXED: Single return statement at function end */
+
+
 }
 
 static void
@@ -225,13 +224,12 @@ gegl_op_class_init (GeglOpClass *klass)
   filter_class->process            = process;
 
   gegl_operation_class_set_keys (operation_class,
-    "name",        "grok:hawaiian-flowers-core",
-    "title",       _("Hawaiian Flowers core"),
+    "name",        "grok/lb:hawaiian-flowers-core",
+    "title",       _("Hawaiian Flowers Pattern Core"),
    "categories",  "hidden", 
-    "reference-hash", "hawaiina39a",
+    "reference-hash", "hawwaiiii",
     "description", _("Renders a stylized Hawaiian flower pattern with teardrop-shaped petals in a staggered grid, against a transparent background"),
     NULL);
 }
-
 
 #endif
