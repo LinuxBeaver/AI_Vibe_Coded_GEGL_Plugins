@@ -4,6 +4,9 @@ Grok can make GEGL plugin from scratch and I may modify them but Grok gets the c
 
 ![image](https://github.com/user-attachments/assets/1656e73c-e7a1-494e-b173-30b56c6d40f5)
 
+![image](https://github.com/user-attachments/assets/3a2c1096-b41e-4004-9e5a-b2957c11f688)
+
+
 LOCATION TO PUT GEGL PLUGIN BINARIES 
 
 **Windows**
