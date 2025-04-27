@@ -21,4 +21,4 @@ LOCATION TO PUT GEGL PLUGIN BINARIES
 then restart GIMP and go to "GEGL operation" to find the new plugins or if on 2.99.19 look in the menu
 
 or look in 
- Filters>Grok
+ Filters>AI GEGL
