@@ -1,6 +1,6 @@
 # AI generated (vibe coded) GEGL plugins
 
-Grok can make GEGL plugin from scratch and I may modify them but Grok gets the credit here
+Grok and DeepSeek can make GEGL plugin from scratch and I may modify them but Grok and DeepSeek gets the credit here. This repo contains the source code of all AI generated GEGL plugins and my modifications to them which does include a few normal plugins of mine that they depend on. Grok and DeepSeek actually use **pixel modifying math*** to make GEGL plugins where as I only chain existing GEGL nodes, this allows them to do highly unique and specialized task that node chaining can't do. 
 
 ![image](https://github.com/user-attachments/assets/1656e73c-e7a1-494e-b173-30b56c6d40f5)
 
