@@ -1,4 +1,4 @@
-# GROK's GEGL plugins
+# AI generated (vibe coded) GEGL plugins
 
 Grok can make GEGL plugin from scratch and I may modify them but Grok gets the credit here
 
