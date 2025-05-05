@@ -6,6 +6,11 @@ Grok and DeepSeek can make GEGL plugin from scratch and I may modify them but Gr
 
 ![image](https://github.com/user-attachments/assets/3a2c1096-b41e-4004-9e5a-b2957c11f688)
 
+![image](https://github.com/user-attachments/assets/7f066599-7447-42ed-aa71-4c94c886d755)
+
+![image](https://github.com/user-attachments/assets/96d5f80d-8fdb-4b89-932e-fa16b17a5bf3)
+
+
 
 LOCATION TO PUT GEGL PLUGIN BINARIES 
 
