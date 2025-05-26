@@ -10,23 +10,22 @@ Grok and DeepSeek can make GEGL plugin from scratch and I may modify them but Gr
 
 ![image](https://github.com/user-attachments/assets/96d5f80d-8fdb-4b89-932e-fa16b17a5bf3)
 
-
-
 LOCATION TO PUT GEGL PLUGIN BINARIES 
 
 **Windows**
 
- C:\Users\(USERNAME)\AppData\Local\gegl-0.4\plug-ins
+ `C:\Users\(USERNAME)\AppData\Local\gegl-0.4\plug-ins`
  
  **Linux** 
 
- ~/.local/share/gegl-0.4/plug-ins
+ `~/.local/share/gegl-0.4/plug-ins`
 
 **Linux (Flatpak includes Chromebook)**
 
-~/.var/app/org.gimp.GIMP/data/gegl-0.4/plug-ins
+`~/.var/app/org.gimp.GIMP/data/gegl-0.4/plug-ins`
 
-then restart GIMP and go to "GEGL operation" to find the new plugins or if on 2.99.19 look in the menu
+then restart GIMP and go to "GEGL operation" to find the new plugins
 
 or look in 
+
  Filters>AI GEGL
